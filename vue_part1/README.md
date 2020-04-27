@@ -1,5 +1,7 @@
 # 스터디에서 참조한 사이트
 
+## 4월 27일 주중스터디
+
 - [class binding](https://v1.vuejs.org/guide/class-and-style.html)
 - [todo](https://kjkj.tistory.com/260)
 - [vuex](https://vuex.vuejs.org/guide/state.html)
