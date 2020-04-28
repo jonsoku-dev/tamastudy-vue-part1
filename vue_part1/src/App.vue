@@ -1,15 +1,19 @@
 <template>
-  <div id="app"><Todo />asd</div>
+  <div id="app">
+    <Todo />
+  </div>
 </template>
 
 <script>
-import Todo from "./components/Todo"
+import Todo from './components/Todo';
 export default {
-  name: "App",
+  name: 'App',
   components: {
     Todo,
   },
-}
+};
 </script>
 
-<style></style>
+<style lang="scss">
+@import './styles/main.scss';
+</style>

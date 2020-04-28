@@ -1,0 +1,10 @@
+{
+  "extends": ["stylelint-config-standard", "stylelint-config-prettier"],
+  "fix": true,
+  "formatter": "verbose",
+  "plugins": ["stylelint-scss"],
+  "rules": {
+    "at-rule-no-unknown": null
+  },
+  "syntax": "scss"
+}

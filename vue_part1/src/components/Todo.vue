@@ -1,31 +1,31 @@
 <template>
-  <div>
+  <div class="container todo">
     <input
+      class="todo__input"
       type="text"
       placeholder="Todo를 입력해주세요. "
       v-model="content"
       @keypress="handleKeyPress"
     />
-    <div>
-      <p v-for="todo in todos" :key="todo.id">
-        <span
-          @click="handleUpdate(todo.id)"
-          v-bind:class="{ done: todo.completed }"
-          >{{ todo.content }}</span
-        ><button @click="handleDelete(todo.id)">x</button>
+    <div class="todo__contents">
+      <p class="todo__content" v-for="todo in todos" :key="todo.id" v-bind:class="{ done: todo.completed }">
+        <span class="todo__text" @click="handleUpdate(todo.id)">{{ todo.content }}</span>
+        <md-button class="md-icon-button" @click="handleDelete(todo.id)">
+          <md-icon>clear</md-icon>
+        </md-button>
       </p>
     </div>
   </div>
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions } from 'vuex';
 
 export default {
-  name: "todo",
+  name: 'todo',
   data() {
     return {
-      content: "",
+      content: '',
     };
   },
   computed: {
@@ -34,26 +34,22 @@ export default {
     },
   },
   methods: {
-    ...mapActions(["createTodo", "deleteTodo", "updateTodo"]),
-    handleKeyPress: function($event) {
-      if ($event.key === "Enter") {
+    ...mapActions(['createTodo', 'deleteTodo', 'updateTodo']),
+    handleKeyPress: function ($event) {
+      if ($event.key === 'Enter') {
+        if (this.content.length === 0) {
+          return alert('텍스트를 입력해주세요. ');
+        }
         this.createTodo(this.content);
-        this.content = "";
+        this.content = '';
       }
     },
-    handleDelete: function(id) {
+    handleDelete: function (id) {
       this.deleteTodo(id);
     },
-    handleUpdate: function(id) {
+    handleUpdate: function (id) {
       this.updateTodo(id);
     },
   },
 };
 </script>
-
-<style scoped>
-.done {
-  color: red;
-  text-decoration: line-through;
-}
-</style>

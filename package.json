@@ -7,17 +7,34 @@
   "license": "MIT",
   "devDependencies": {
     "husky": "^4.2.5",
-    "lint-staged": "^10.1.7",
-    "prettier": "^2.0.5"
+    "lint-staged": "^10.1.7"
   },
   "scripts": {
-    "precommit": "lint-staged",
-    "prepush": "npm test"
+    "vuelint": "cd vue_part1 && yarn lint",
+    "vueprettier": "cd vue_part1 && prettier --write",
+    "vuestylelint": "cd vue_part1 && yarn stylelint",
+    "markupstylelint": "cd markup_part3 && yarn stylelint",
+    "markupprettier": "cd markup_part3 && prettier --write"
+  },
+  "husky": {
+    "hooks": {
+      "prepare-commit-msg": "./scripts/git-commit-message.sh $HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged"
+    }
   },
   "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "prettier --write --trailing-comma es5 --single-quote true --tab-width 4",
+    "vue_part1/src/**/*.{vue,js,scss}": [
+      "npm run vueprettier",
+      "npm run vuestylelint",
+      "git add"
+    ],
+    "vue_part1/src/**/*.{vue,js}": [
+      "npm run vuelint",
+      "git add"
+    ],
+    "markup_part3/src/**/*.{html,scss}": [
+      "npm run markupprettier",
+      "npm run markupstylelint",
       "git add"
     ]
   }
