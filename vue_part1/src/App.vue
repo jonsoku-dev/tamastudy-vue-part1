@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <Todo />
-    asd
   </div>
 </template>
 
@@ -14,3 +13,17 @@ export default {
   },
 };
 </script>
+
+<style>
+.container {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 768px;
+    margin: 0 auto;
+    height: inherit;
+  }
+}
+</style>
