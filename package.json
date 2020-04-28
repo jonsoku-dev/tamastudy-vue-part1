@@ -6,6 +6,7 @@
   "author": "jonsoku2 <whdtjr2792@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "eslint": "^6.8.0",
     "husky": "^4.2.5",
     "lint-staged": "^10.1.7",
     "prettier": "^2.0.5"
@@ -15,10 +16,21 @@
     "prepush": "npm test"
   },
   "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "prettier --write --trailing-comma es5 --single-quote true --tab-width 4",
-      "git add"
+    "vue_part1/src/**/*.{js,json,vue}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "markup_part3/src/**/*.{css,html,js,json,scss}": [
+      "prettier --write"
+    ],
+    "markup_part3/src/**/*.{js}": [
+      "eslint --fix"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "prepare-commit-msg": "./scripts/git-commit-message.sh $HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged --allow-empty"
+    }
   }
 }
