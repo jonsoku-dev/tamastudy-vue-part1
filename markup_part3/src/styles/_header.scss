@@ -36,9 +36,17 @@
     align-items: center;
     margin-top: $space * 2;
 
+    @media only screen and (max-width: 768px) {
+      flex-direction: column;
+    }
+
     &--logo {
       width: 100px;
       height: 40px;
+
+      @media only screen and (max-width: 768px) {
+        margin-bottom: $space * 3;
+      }
 
       img {
         width: 100%;
@@ -51,6 +59,11 @@
       display: flex;
       align-items: center;
       margin-right: auto;
+
+      @media only screen and (max-width: 768px) {
+        justify-content: space-around;
+        margin-right: 0;
+      }
     }
 
     &--link {
@@ -60,6 +73,10 @@
       margin: 0 $space * 2;
       padding-bottom: $space / 2;
       transition: all 0.2s ease-out;
+
+      @media only screen and (max-width: 768px) {
+        font-size: 12px;
+      }
 
       &:hover {
         color: #2154bd;
@@ -90,6 +107,10 @@
     &--toggle {
       span {
         margin-left: $space / 2;
+      }
+
+      @media only screen and (max-width: 768px) {
+        display: none;
       }
     }
   }
