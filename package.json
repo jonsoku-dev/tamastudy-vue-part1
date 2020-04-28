@@ -25,7 +25,6 @@
   "lint-staged": {
     "vue_part1/src/**/*.{vue,js,scss}": [
       "npm run vueprettier",
-      "npm run vuelint",
       "npm run vuestylelint",
       "git add"
     ],

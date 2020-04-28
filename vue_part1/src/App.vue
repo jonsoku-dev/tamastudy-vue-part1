@@ -14,16 +14,6 @@ export default {
 };
 </script>
 
-<style>
-.container {
-  width: 100%;
-}
-
-@media (min-width: 768px) {
-  .container {
-    width: 768px;
-    margin: 0 auto;
-    height: inherit;
-  }
-}
+<style lang="scss">
+@import './styles/main.scss';
 </style>
