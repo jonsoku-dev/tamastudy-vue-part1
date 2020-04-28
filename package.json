@@ -1,0 +1,24 @@
+{
+  "name": "tamastudy-remote",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/jonsoku2/tamastudy-remote",
+  "author": "jonsoku2 <whdtjr2792@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "husky": "^4.2.5",
+    "lint-staged": "^10.1.7",
+    "prettier": "^2.0.5"
+  },
+  "scripts": {
+    "precommit": "lint-staged",
+    "prepush": "npm test"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "prettier --write --trailing-comma es5 --single-quote true --tab-width 4",
+      "git add"
+    ]
+  }
+}
