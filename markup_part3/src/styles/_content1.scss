@@ -1,0 +1,125 @@
+.content1 {
+  margin-top: $space * 4;
+  position: relative;
+
+  .cbox1 {
+    display: flex;
+
+    @media only screen and (max-width: 768px) {
+      width: 100%;
+      flex-direction: column;
+    }
+
+    &__slider {
+      width: calc(100% - 330px - 190px);
+      height: 210px;
+
+      @media only screen and (max-width: 768px) {
+        width: 100%;
+      }
+    }
+
+    &__sub-banner {
+      width: 190px;
+      background-color: #4b4fc5;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      box-sizing: border-box;
+      padding: $space * 6 $space * 4 $space * 4;
+      font-size: 24px;
+      color: #fff;
+
+      @media only screen and (max-width: 768px) {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    .main-banner {
+      position: absolute;
+      right: 0;
+      width: 330px;
+      background-color: #218fe5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-sizing: border-box;
+      padding: $space * 6;
+
+      @media only screen and (max-width: 768px) {
+        position: relative;
+        width: 100%;
+      }
+
+      &__title {
+        color: #fff;
+        margin-bottom: $space * 2;
+      }
+
+      &__button {
+        width: 100%;
+        box-sizing: border-box;
+        padding: $space * 2 - 4;
+        margin: $space 0;
+        border-radius: 32px;
+        border: none;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
+        outline: none;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .cbox2 {
+    background-image: url('https://images.unsplash.com/photo-1587860166238-7b3c5d8bc34d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    &__wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      box-sizing: border-box;
+      padding: $space * 8 $space * 4;
+      width: 690px;
+
+      @media only screen and (max-width: 768px) {
+        width: 100%;
+      }
+    }
+
+    &__title {
+      margin-bottom: $space * 4;
+      color: #fff;
+      font-size: 39px;
+    }
+
+    &__contents {
+      display: flex;
+    }
+
+    &__content {
+      display: flex;
+      margin: 0 $space * 2;
+      border-top: 1px solid #e2e2e2;
+      box-sizing: border-box;
+      padding-top: $space * 3;
+    }
+
+    &__num {
+      margin-right: $space;
+      color: #797979;
+      font-weight: 900;
+      font-size: 24px;
+    }
+
+    &__desc {
+      color: #fff;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+  }
+}
