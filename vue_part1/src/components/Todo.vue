@@ -33,7 +33,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['createTodo', 'deleteTodo', 'updateTodo']),
+    ...mapActions(['bindTodosRef', 'createTodo', 'deleteTodo', 'updateTodo']),
     handleKeyPress: function ($event) {
       if ($event.key === 'Enter') {
         if (this.content.length === 0) {
@@ -49,6 +49,9 @@ export default {
     handleUpdate: function (id) {
       this.updateTodo(id);
     },
+  },
+  created() {
+    this.bindTodosRef();
   },
 };
 </script>

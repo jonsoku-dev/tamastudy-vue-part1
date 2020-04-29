@@ -1,9 +1,12 @@
+import { firestoreAction } from 'vuexfire';
+import { dbTodoRef } from '../../firebase';
+
 const state = {
   todos: [],
 };
 
 const getters = {
-  getTodos: (state) => state.todos,
+  getTodos: state => state.todos,
 };
 
 const mutations = {
@@ -11,28 +14,45 @@ const mutations = {
     state.todos = [...state.todos, todo];
   },
   DELETE_TODO(state, id) {
-    state.todos = state.todos.filter((todo) => todo.id !== id);
+    state.todos = state.todos.filter(todo => todo.id !== id);
   },
-  UPDATE_TODO(state, id) {
-    state.todos = state.todos.map((todo) =>
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo
-    );
+  UPDATE_TODO(state, updatedTodo, id) {
+    state.todos = state.todos.map(todo => (todo.id === id ? updatedTodo : todo));
   },
 };
 
 const actions = {
-  createTodo({ commit }, content) {
-    commit("ADD_TODO", {
-      id: `todo-${Date.now()}`,
-      content,
-      completed: false,
-    });
+  bindTodosRef: firestoreAction(async context => {
+    try {
+      return await context.bindFirestoreRef('todos', dbTodoRef);
+    } catch (error) {
+      alert(error);
+    }
+  }),
+  createTodo: async ({ commit }, content) => {
+    try {
+      const newTodo = {
+        id: `todo-${Date.now()}`,
+        content,
+        completed: false,
+      };
+      commit('ADD_TODO', newTodo);
+      await dbTodoRef.add(newTodo);
+    } catch (error) {
+      alert(error);
+    }
   },
-  deleteTodo({ commit }, id) {
-    commit("DELETE_TODO", id);
+  deleteTodo: ({ commit }, id) => {
+    commit('DELETE_TODO', id);
   },
-  updateTodo({ commit }, id) {
-    commit("UPDATE_TODO", id);
+  updateTodo: async ({ commit }, id) => {
+    try {
+      const todo = await dbTodoRef;
+      console.log(todo);
+      commit('UPDATE_TODO', todo, id);
+    } catch (error) {
+      alert(error);
+    }
   },
 };
 
