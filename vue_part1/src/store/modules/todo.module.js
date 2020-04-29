@@ -9,17 +9,7 @@ const getters = {
   getTodos: state => state.todos,
 };
 
-const mutations = {
-  ADD_TODO(state, todo) {
-    state.todos = [...state.todos, todo];
-  },
-  DELETE_TODO(state, id) {
-    state.todos = state.todos.filter(todo => todo.id !== id);
-  },
-  UPDATE_TODO(state, updatedTodo, id) {
-    state.todos = state.todos.map(todo => (todo.id === id ? updatedTodo : todo));
-  },
-};
+const mutations = {};
 
 const actions = {
   bindTodosRef: firestoreAction(async context => {
@@ -32,12 +22,10 @@ const actions = {
   createTodo: async ({ commit }, content) => {
     try {
       const newTodo = {
-        id: `todo-${Date.now()}`,
         content,
         completed: false,
       };
-      commit('ADD_TODO', newTodo);
-      await dbTodoRef.add(newTodo);
+      await dbTodoRef.doc(`todo`).set(newTodo);
     } catch (error) {
       alert(error);
     }
@@ -45,11 +33,11 @@ const actions = {
   deleteTodo: ({ commit }, id) => {
     commit('DELETE_TODO', id);
   },
-  updateTodo: async ({ commit }, id) => {
+  updateTodo: async ({ commit }, todo) => {
     try {
-      const todo = await dbTodoRef;
-      console.log(todo);
-      commit('UPDATE_TODO', todo, id);
+      await dbTodoRef.doc(todo.id).update({
+        completed: !todo.completed,
+      });
     } catch (error) {
       alert(error);
     }
