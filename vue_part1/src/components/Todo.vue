@@ -9,7 +9,7 @@
     />
     <div class="todo__contents">
       <p class="todo__content" v-for="todo in todos" :key="todo.id" v-bind:class="{ done: todo.completed }">
-        <span class="todo__text" @click="handleUpdate(todo.id)">{{ todo.content }}</span>
+        <span class="todo__text" @click="handleUpdate(todo)">{{ todo.content }}</span>
         <md-button class="md-icon-button" @click="handleDelete(todo.id)">
           <md-icon>clear</md-icon>
         </md-button>
@@ -46,8 +46,8 @@ export default {
     handleDelete: function (id) {
       this.deleteTodo(id);
     },
-    handleUpdate: function (id) {
-      this.updateTodo(id);
+    handleUpdate: function (todo) {
+      this.updateTodo(todo);
     },
   },
   created() {
