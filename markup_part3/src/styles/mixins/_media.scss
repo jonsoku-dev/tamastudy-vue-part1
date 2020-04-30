@@ -1,0 +1,19 @@
+@mixin for-size($size) {
+  @if $size == tablet {
+    @media only screen and (max-width: 768px) {
+      @content;
+    }
+  }
+
+  @else if $size == large-tablet {
+    @media only screen and (max-width: 1024px) {
+      @content;
+    }
+  }
+
+  @else if $size == laptop {
+    @media only screen and (max-width: 1280px) {
+      @content;
+    }
+  }
+}
