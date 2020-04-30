@@ -1,15 +1,32 @@
 .todo {
+  &__filters {
+    display: flex;
+    justify-content: space-between;
+    margin: $base-spacing * 2 0;
+  }
+
+  &__filter {
+    width: 100%;
+    box-sizing: border-box;
+    padding: $base-spacing $base-spacing * 2;
+    background-color: white;
+    &--active {
+      background-color: black;
+      color: white;
+    }
+  }
+
   &__input {
     width: 100%;
     box-sizing: border-box;
-    padding: 16px;
+    padding: $base-spacing * 2;
     font-size: 18px;
     outline: none;
     letter-spacing: 1.4px;
   }
 
   &__items {
-    margin-top: 32px;
+    margin-top: $base-spacing * 4;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -19,7 +36,7 @@
   &__edit {
     input {
       box-sizing: border-box;
-      padding: 8px 16px;
+      padding: $base-spacing $base-spacing * 2;
     }
   }
 
@@ -33,8 +50,8 @@
     letter-spacing: 1.4px;
     line-height: 1.5;
     box-sizing: border-box;
-    padding: 8px 16px;
-    padding-right: 32px;
+    padding: $base-spacing $base-spacing * 2;
+    padding-right: $base-spacing * 4;
     border-radius: 16px;
     cursor: pointer;
   }
