@@ -8,41 +8,37 @@
     letter-spacing: 1.4px;
   }
 
-  &__contents {
+  &__items {
     margin-top: 32px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
   }
 
-  &__content {
+  &__edit {
+    input {
+      box-sizing: border-box;
+      padding: 8px 16px;
+    }
+  }
+
+  &__item {
+    width: 100%;
     margin: 8px;
     font-size: 24px;
-    display: inline-flex;
+    display: flex;
     align-items: center;
     font-weight: 400;
     letter-spacing: 1.4px;
     line-height: 1.5;
     box-sizing: border-box;
     padding: 8px 16px;
-    padding-right: 0;
+    padding-right: 32px;
     border-radius: 16px;
     cursor: pointer;
-
-    &.done {
-      position: relative;
-
-      &::after {
-        content: '';
-        position: absolute;
-        width: 90%;
-        height: 1px;
-        background: black;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-      }
-    }
+  }
+  &__text {
+    margin-right: auto;
   }
 }
