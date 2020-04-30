@@ -1,27 +1,23 @@
 <template>
   <div class="container todo">
-    <input
-      class="todo__input"
-      type="text"
-      placeholder="Todo를 입력해주세요. "
-      v-model="content"
-      @keypress="handleKeyPress"
-    />
-    <div class="todo__contents">
-      <p class="todo__content" v-for="todo in todos" :key="todo.id" v-bind:class="{ done: todo.completed }">
-        <span class="todo__text" @click="handleUpdate(todo)">{{ todo.content }}</span>
-        <md-button class="md-icon-button" @click="handleDelete(todo.id)">
-          <md-icon>clear</md-icon>
-        </md-button>
-      </p>
+    <todo-input />
+    <div class="todo__items">
+      <todo-item v-for="todo in todos" :key="todo.id" :todo="todo" />
     </div>
   </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex';
+import TodoInput from './TodoInput';
+import TodoItem from './TodoItem';
+
 export default {
   name: 'todo',
+  components: {
+    TodoInput,
+    TodoItem,
+  },
   data() {
     return {
       content: '',
@@ -33,22 +29,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['bindTodosRef', 'createTodo', 'deleteTodo', 'updateTodo']),
-    handleKeyPress: function ($event) {
-      if ($event.key === 'Enter') {
-        if (this.content.length === 0) {
-          return alert('텍스트를 입력해주세요. ');
-        }
-        this.createTodo(this.content);
-        this.content = '';
-      }
-    },
-    handleDelete: function (id) {
-      this.deleteTodo(id);
-    },
-    handleUpdate: function (todo) {
-      this.updateTodo(todo);
-    },
+    ...mapActions(['bindTodosRef']),
   },
   created() {
     this.bindTodosRef();
