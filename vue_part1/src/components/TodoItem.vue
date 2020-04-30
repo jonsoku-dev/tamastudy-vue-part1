@@ -14,7 +14,7 @@
         :value="editedContent"
         @input="editedContent = $event.target.value"
         @keypress.enter="handleUpdateContent(todo)"
-        @keypress.esc="offEditMode"
+        @keydown.esc="offEditMode"
       />
     </div>
 
