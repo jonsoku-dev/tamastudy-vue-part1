@@ -58,4 +58,16 @@
   &__text {
     margin-right: auto;
   }
+
+  &__global-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: $base-spacing * 1.5;
+  }
+
+  &__global-action {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
 }
