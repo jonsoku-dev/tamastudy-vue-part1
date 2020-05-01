@@ -1,4 +1,13 @@
 .todo {
+  margin-top: $base-spacing * 3;
+  &__nav {
+    button {
+      background: none;
+      border: none;
+      outline: none;
+    }
+  }
+
   &__filters {
     display: flex;
     justify-content: space-between;

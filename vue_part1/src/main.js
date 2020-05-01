@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import App from './App.vue';
 import store from './store/store';
+import router from './router';
 import { MdButton, MdContent, MdTabs, MdIcon } from 'vue-material/dist/components';
 import 'vue-material/dist/vue-material.min.css';
 import 'vue-material/dist/theme/default.css';
@@ -12,6 +13,7 @@ Vue.use(MdTabs);
 Vue.use(MdIcon);
 
 new Vue({
+  router,
   store,
   render: h => h(App),
 }).$mount('#app');

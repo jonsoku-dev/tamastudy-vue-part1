@@ -40,6 +40,7 @@
   },
   "dependencies": {
     "crypto-random-string": "^3.2.0",
-    "dayjs": "^1.8.25"
+    "dayjs": "^1.8.25",
+    "vue-router": "^3.1.6"
   }
 }

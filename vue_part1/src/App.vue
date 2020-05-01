@@ -1,16 +1,12 @@
 <template>
   <div id="app">
-    <Todo />
+    <router-view />
   </div>
 </template>
 
 <script>
-import Todo from './components/Todo';
 export default {
   name: 'App',
-  components: {
-    Todo,
-  },
 };
 </script>
 
