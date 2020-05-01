@@ -50,6 +50,7 @@ export default {
   },
   created() {
     if (!this.userData.isLoggedIn) {
+      alert('로그인을 해주세요. ');
       this.$router.push('/');
     }
     this.bindTodosRef();

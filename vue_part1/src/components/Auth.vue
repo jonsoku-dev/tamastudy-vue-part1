@@ -1,25 +1,56 @@
 <template>
   <div class="auth container">
     <div class="auth__info" v-if="isLoggedIn">
-      <div class="auth__avatar">
-        <img :src="hasAvatar ? hasAvatar : 'https://i.dlpng.com/static/png/6728146_preview.png'" alt="avatar" />
+      <div class="auth__user auth__user--avatar">
+        <img
+          :src="
+            hasAvatar
+              ? hasAvatar
+              : 'https://d1nhio0ox7pgb.cloudfront.net/_img/o_collection_png/green_dark_grey/256x256/plain/user.png'
+          "
+          alt="avatar"
+        />
       </div>
-      <div>{{ currentUser }}님 환영합니다.</div>
-      <div><button @click="handleLogout">Logout</button></div>
+      <div class="auth__user auth__user--email">
+        <strong>{{ currentUser }}</strong> 님 환영합니다.
+      </div>
+      <div class="auth__logout"><button class="auth__logout-btn" @click="handleLogout">Logout</button></div>
     </div>
-    <div class="auth__login" v-else>
-      <login-form />
+    <div v-else>
+      <div v-if="!showLoginForm && !showRegisterForm">
+        <md-button class="md-icon-button" @click="onClickLogin">
+          <md-icon>vpn_key</md-icon>
+        </md-button>
+        <md-button class="md-icon-button" @click="onClickRegister">
+          <md-icon>how_to_reg</md-icon>
+        </md-button>
+      </div>
+      <div v-if="showLoginForm" class="auth__login">
+        <login-form :onClickReturnFormStatus="onClickReturnFormStatus" />
+      </div>
+      <div v-if="showRegisterForm" class="auth__register">
+        <register-form :onClickReturnFormStatus="onClickReturnFormStatus" />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import LoginForm from './LoginForm';
 import { mapGetters, mapActions } from 'vuex';
+
+import LoginForm from './LoginForm';
+import RegisterForm from './RegisterForm';
 
 export default {
   components: {
     LoginForm,
+    RegisterForm,
+  },
+  data() {
+    return {
+      showLoginForm: false,
+      showRegisterForm: false,
+    };
   },
   computed: {
     ...mapGetters(['userData']),
@@ -27,6 +58,7 @@ export default {
       return this.userData.isLoggedIn;
     },
     hasAvatar() {
+      console.log(this.userData.userInfo.photoURL);
       return this.userData.userInfo.photoURL;
     },
     currentUser() {
@@ -39,33 +71,18 @@ export default {
       this.logOut();
       this.$router.push('/');
     },
+    onClickLogin() {
+      this.showRegisterForm = false;
+      this.showLoginForm = true;
+    },
+    onClickRegister() {
+      this.showLoginForm = false;
+      this.showRegisterForm = true;
+    },
+    onClickReturnFormStatus() {
+      this.showLoginForm = false;
+      this.showRegisterForm = false;
+    },
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.auth {
-  display: flex;
-  justify-content: flex-end;
-  &__info {
-    display: flex;
-    align-items: center;
-    > div {
-      margin: 0 8px;
-    }
-  }
-  &__avatar {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 1px solid #e2e2e2;
-    box-sizing: border-box;
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: fill;
-    }
-  }
-}
-</style>

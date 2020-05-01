@@ -1,6 +1,6 @@
 <template>
   <div class="auth__form-group">
-    <form class="auth__form auth__form--login">
+    <form class="auth__form auth__form--register">
       <input class="auth__input auth__input--email" placeholder="email" type="text" v-model="email" />
       <input
         class="auth__input auth__input--password"
@@ -11,7 +11,7 @@
       />
       <button class="auth__button auth__button--submit" type="submit" @click.prevent="handleSubmit">
         <md-button class="md-icon-button">
-          <md-icon>vpn_key</md-icon>
+          <md-icon>how_to_reg</md-icon>
         </md-button>
       </button>
       <button class="auth__return" @click.prevent.stop="onClickReturnFormStatus">
@@ -36,13 +36,13 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['logIn']),
+    ...mapActions(['register']),
     handleSubmit() {
-      const loginData = {
+      const registerData = {
         email: this.email,
         password: this.password,
       };
-      this.logIn(loginData);
+      this.register(registerData);
     },
   },
 };
