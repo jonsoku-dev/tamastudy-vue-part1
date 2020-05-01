@@ -26,7 +26,7 @@
         <button type="submit" class="btn_green" @click.prevent="logInFn">login</button>
       </form>
     </div>
-    <div>
+    <div v-else>
       <button @click="logOut">Logout</button>
     </div>
   </div>
