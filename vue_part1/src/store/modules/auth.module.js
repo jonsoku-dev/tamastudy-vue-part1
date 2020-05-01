@@ -1,36 +1,37 @@
 import { firebaseAuth } from '../../firebase';
 
 const state = {
-  isLoggedIn: false,
-  userInfo: null,
-  loading: false,
-  error: null,
+  userData: {
+    isLoggedIn: false,
+    userInfo: null,
+    loading: false,
+    error: null,
+  },
 };
 
 const getters = {
-  userData: (state) => state,
+  userData: (state) => state.userData,
 };
 
 const mutations = {
   PENDING: (state) => {
-    state.loading = true;
+    state.userData = { ...state.userData, loading: true };
   },
   LOGIN: (state, userInfo) => {
     if (userInfo) {
-      state.isLoggedIn = true;
-      state.userInfo = userInfo;
-      state.loading = false;
+      state.userData = { ...state.userData, loading: true, isLoggedIn: true, userInfo };
     }
   },
   LOGOUT: (state) => {
-    state.isLoggedIn = false;
-    state.userInfo = null;
-    state.loading = false;
+    state.userData = { ...state.userData, loading: true, isLoggedIn: false, userInfo: null };
+  },
+  REGISTER: (state, userInfo) => {
+    if (userInfo) {
+      state.userData = { ...state.userData, loading: true, isLoggedIn: true, userInfo };
+    }
   },
   FAIL: (state, errorMessage) => {
-    state.isLoggedIn = false;
-    state.loading = false;
-    state.error = errorMessage;
+    state.userData = { ...state.userData, loading: true, isLoggedIn: false, userInfo: null, error: errorMessage };
   },
 };
 
@@ -56,6 +57,24 @@ const actions = {
     try {
       await firebaseAuth.signOut();
       commit('LOGOUT');
+    } catch (error) {
+      console.log(error);
+      alert(error.message);
+      commit('FAIL', error.message);
+    }
+  },
+  register: async ({ commit }, registerData) => {
+    commit('PENDING');
+    try {
+      if (confirm('회원가입에 동의하십니까? ')) {
+        const res = await firebaseAuth.createUserWithEmailAndPassword(registerData.email, registerData.password);
+        const userInfo = {
+          email: res.user.email,
+          emailVerified: res.user.emailVerified,
+          photoURL: res.user.photoURL,
+        };
+        commit('REGISTER', userInfo);
+      }
     } catch (error) {
       console.log(error);
       alert(error.message);

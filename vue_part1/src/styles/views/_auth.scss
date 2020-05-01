@@ -1,0 +1,106 @@
+// <template>
+//   <div class="auth">
+//     <form class="auth__form auth__form--register">
+//       <input class="auth__input auth__input--email" type="text" v-model="email" />
+//       <input class="auth__input auth__input--password" type="password" v-model="password" />
+//       <button class="auth__button auth__button--submit" type="submit" @click.prevent="handleSubmit">로그인</button>
+//     </form>
+//     <button class="auth__return" @click="onClickReturnFormStatus">back</button>
+//   </div>
+// </template>
+
+.auth {
+  display: flex;
+  justify-content: flex-end;
+  &__info {
+    display: flex;
+    align-items: center;
+    > div {
+      margin: 0 8px;
+    }
+  }
+  &__user {
+    &--avatar {
+      width: 30px;
+      height: 30px;
+      border: 1px solid #e2e2e2;
+      box-sizing: border-box;
+      border-radius: 50%;
+      padding: 2px;
+      overflow: hidden;
+      img {
+        width: 100%;
+        height: 100;
+        object-fit: cover;
+      }
+    }
+    &--email {
+      strong {
+        font-weight: 900;
+      }
+    }
+  }
+
+  &__logout {
+    button {
+      margin: 0;
+      text-transform: uppercase;
+      font-size: 10px;
+      box-sizing: border-box;
+      padding: 4px 8px;
+      border-radius: 10px;
+      border: 1px solid #000;
+      transition: all 200ms ease-in-out;
+      &:hover {
+        color: #fff;
+        background-color: black;
+      }
+    }
+  }
+
+  &__avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid #e2e2e2;
+    box-sizing: border-box;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: fill;
+    }
+  }
+  &__form-group {
+    display: flex;
+    align-items: center;
+  }
+  &__form {
+    display: flex;
+    align-items: center;
+    // return button styling
+    .md-ripple {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+  }
+  &__input {
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #e2e2e2;
+    margin: 0 8px;
+    box-sizing: border-box;
+    padding: 4px;
+    font-size: 12px;
+  }
+  &__button {
+    margin: 0;
+    padding: 0;
+    border: none;
+  }
+  &__return {
+    margin: 0;
+    padding: 0;
+    border: none;
+  }
+}
