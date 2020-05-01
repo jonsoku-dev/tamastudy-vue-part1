@@ -1,15 +1,20 @@
 <template>
   <div id="app">
-    <Todo />
+    <Auth />
+    <Header />
+    <router-view />
+    <div>Footer</div>
   </div>
 </template>
 
 <script>
-import Todo from './components/Todo';
+import Auth from './components/Auth';
+import Header from './components/Header';
 export default {
   name: 'App',
   components: {
-    Todo,
+    Auth,
+    Header,
   },
 };
 </script>
