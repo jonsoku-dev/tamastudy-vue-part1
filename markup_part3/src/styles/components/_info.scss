@@ -34,6 +34,10 @@
       border: 1px solid $light-grey;
 
       @include flex(row, center, space-around);
+
+      i {
+        font-size: 40px;
+      }
     }
 
     &--3 {
@@ -44,6 +48,10 @@
 
       * {
         color: $white;
+      }
+
+      i {
+        font-size: 40px;
       }
     }
 
