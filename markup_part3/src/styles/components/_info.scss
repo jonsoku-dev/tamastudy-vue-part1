@@ -9,6 +9,11 @@
     'window mobile mobile';
 
   &__card {
+    h2 {
+      font-size: 27px;
+      margin-bottom: $space * 2;
+    }
+
     &--1 {
       background-color: $light-blue;
       grid-area: window;
@@ -52,21 +57,6 @@
       > div {
         flex: 0 0 50%;
         padding-left: $space * 2;
-
-        p {
-          &:not(:first-of-type) {
-            color: #555;
-          }
-
-          &:first-of-type {
-            font: {
-              size: 27px;
-              weight: 700;
-            }
-
-            margin-bottom: $space * 2;
-          }
-        }
       }
 
       > i {
