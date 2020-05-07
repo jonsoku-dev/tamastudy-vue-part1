@@ -1,0 +1,86 @@
+// Footer background Color
+footer {
+  background-color: $footer-bg-color;
+}
+
+.footer {
+  * {
+    color: $footer-font-color;
+  }
+
+  position: relative;
+  // Footer buttons
+  &__buttons {
+    @include flex(row, center, space-around);
+
+    padding-bottom: $space * 3;
+  }
+
+  &__button {
+    width: 100%;
+    margin: 0;
+    outline: none;
+    border: 1px solid $light-grey;
+    height: 100%;
+    background-color: $footer-bg-color;
+    padding: $space * 1.5;
+    cursor: pointer;
+
+    @include flex(row, center, space-between);
+  }
+
+  // Footer navigation
+  &__list {
+    @include flex(row, center, flex-start);
+
+    padding-bottom: $space * 3;
+  }
+
+  &__item {
+    margin-right: $space * 3;
+
+    &:first-of-type {
+      a {
+        color: white;
+      }
+    }
+  }
+
+  // Footer information
+  &__info {
+    padding-bottom: $space * 3;
+  }
+
+  &__address {
+    margin-bottom: $space;
+  }
+
+  // Footer CopyRight
+  &__copyright {
+    padding-bottom: $space * 3;
+  }
+
+  // Footer Call
+  &__call {
+    position: absolute;
+    right: 0;
+    bottom: $space * 3;
+
+    p {
+      color: $white;
+
+      &:first-of-type {
+        font-size: 23px;
+      }
+
+      &:nth-of-type(2) {
+        font-size: 36px;
+        font-weight: 900;
+      }
+
+      &:last-of-type {
+        font-size: 14px;
+      }
+    }
+  }
+}

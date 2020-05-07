@@ -7,6 +7,7 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
       rel="stylesheet"
     />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <script src="https://kit.fontawesome.com/337ce4fd5e.js" crossorigin="anonymous"></script>
     <title>webpack starterkit</title>
   </head>
@@ -54,7 +55,19 @@
       </header>
       <div class="content1 container">
         <div class="content1__cbox1 cbox1">
-          <div class="cbox1__slider">slide</div>
+          <div class="cbox1__slider">
+            <!-- Swiper -->
+            <div class="swiper-container cbox1__slider-main">
+              <div class="swiper-wrapper cbox1__slider-wrapper">
+                <div class="swiper-slide cbox1__slider-slide">이걸로</div>
+                <div class="swiper-slide cbox1__slider-slide">마크업 파트 3</div>
+                <div class="swiper-slide cbox1__slider-slide">스터디가</div>
+                <div class="swiper-slide cbox1__slider-slide">끝이났습니다.</div>
+              </div>
+              <!-- Add Pagination -->
+              <div class="swiper-pagination cbox1__slider-pagination"></div>
+            </div>
+          </div>
           <a href="#" class="cbox1__sub-banner">사고보험금청구</a>
           <div class="cbox1__main-banner main-banner">
             <h3 class="main-banner__title">나의 보험을 더 편리하게</h3>
@@ -114,7 +127,33 @@
         </div>
       </div>
       <div class="slider container">
-        slider
+        <!-- Slider main container -->
+        <div class="swiper-container slider__main">
+          <!-- Additional required wrapper -->
+          <div class="swiper-wrapper slider__wrapper">
+            <!-- Slides -->
+            <div class="swiper-slide slider__slide slider__slide--1">
+              <img
+                src="https://images.unsplash.com/photo-1588799155423-0da2d7d79502?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=900&q=60"
+                alt="slider"
+              />
+            </div>
+            <div class="swiper-slide slider__slide slider__slide--2">
+              <img
+                src="https://images.unsplash.com/photo-1588794673401-3f523f4c5890?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=900&q=60"
+                alt="slider2"
+              />
+            </div>
+            <div class="swiper-slide slider__slide slider__slide--3">
+              <img
+                src="https://images.unsplash.com/photo-1587614204968-68ba4b5e0be3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=900&q=60"
+                alt="slider3"
+              />
+            </div>
+          </div>
+          <!-- If we need pagination -->
+          <div class="swiper-pagination slider__pagination"></div>
+        </div>
       </div>
       <div class="content2 container">
         <div class="content2__cards">
@@ -209,8 +248,64 @@
           <i class="fab fa-reacteurope info__icon info__icon--react"></i>
         </div>
       </div>
-      <footer class="footer">
-        footer
+      <footer>
+        <div class="footer container">
+          <div class="footer__buttons">
+            <button class="footer__button">
+              <span class="footer__button-text">정보안내</span>
+              <i class="fas fa-plus footer__button-icon"></i>
+            </button>
+            <button class="footer__button">
+              <span class="footer__button-text">고객서비스</span>
+              <i class="fas fa-plus footer__button-icon"></i>
+            </button>
+            <button class="footer__button">
+              <span class="footer__button-text">신고센터</span>
+              <i class="fas fa-plus footer__button-icon"></i>
+            </button>
+            <button class="footer__button">
+              <span class="footer__button-text">관련사이트</span>
+              <i class="fas fa-plus footer__button-icon"></i>
+            </button>
+          </div>
+          <div class="footer__main">
+            <ul class="footer__list">
+              <li class="footer__item">
+                <a class="footer__link" href="#">개인정보처리방침</a>
+              </li>
+              <li class="footer__item">
+                <a class="footer__link" href="#">가입설계동의</a>
+              </li>
+              <li class="footer__item">
+                <a class="footer__link" href="#">마케팅활용정보동의</a>
+              </li>
+              <li class="footer__item">
+                <a class="footer__link" href="#">인터넷창구이용안내</a>
+              </li>
+              <li class="footer__item">
+                <a class="footer__link" href="#">모바일창구이용안내</a>
+              </li>
+              <li class="footer__item">
+                <a class="footer__link" href="#">전자민원신청</a>
+              </li>
+              <li class="footer__item">
+                <a class="footer__link" href="#">지점/금융프라자안내</a>
+              </li>
+            </ul>
+            <div class="footer__info">
+              <p class="footer__address">04323 서울특별시 용산구 한강대로 372 KDB생명타워 KDB생명보험주식회사</p>
+              <p class="footer__ceo">대표이사 | 정재욱사업자등록번호 408-81-07958</p>
+            </div>
+            <p class="footer__copyright">
+              COPYRIGHT © KDB LIFE INSURANCE. ALL RIGHTS RESERVED.
+            </p>
+          </div>
+          <div class="footer__call">
+            <p>고객센터</p>
+            <p>1588-4040</p>
+            <p>(평일 9:00 ~ 18:00)</p>
+          </div>
+        </div>
       </footer>
     </div>
   </body>
