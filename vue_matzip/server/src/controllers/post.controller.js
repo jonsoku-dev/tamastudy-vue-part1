@@ -55,31 +55,34 @@ exports.getPost = asyncHandler(async (req, res, next) => {
 exports.createPost = asyncHandler(async (req, res, next) => {
   const title = req.body.title;
   const description = req.body.description;
+  let images = [];
 
-  req.files.map(async (file) => {
-    const { filename: image } = file;
-    try {
-      await sharp(file.path)
-        .resize(500)
-        .jpeg({ quality: 90 })
-        .toFile(
-          path.join(
-            __dirname,
-            "..",
-            "..",
-            "public",
-            "images",
-            "post",
-            `resized-${image}`
-          )
-        );
-      fs.unlinkSync(file.path);
-    } catch (error) {
-      console.log("RESIZING ERROR : ", error);
-    }
-  });
-
-  const images = req.files.map((file) => `resized-${file.filename}`);
+  if (req.files.length !== 0) {
+    console.log("이미지 리사이징 중 ...");
+    req.files.map(async (file) => {
+      const { filename: image } = file;
+      try {
+        await sharp(file.path)
+          .resize(500)
+          .jpeg({ quality: 90 })
+          .toFile(
+            path.join(
+              __dirname,
+              "..",
+              "..",
+              "public",
+              "images",
+              "post",
+              `resized-${image}`
+            )
+          );
+        fs.unlinkSync(file.path);
+      } catch (error) {
+        console.log("RESIZING ERROR : ", error);
+      }
+    });
+    images = req.files.map((file) => `resized-${file.filename}`);
+  }
 
   const newPost = await Post.create({
     title,
