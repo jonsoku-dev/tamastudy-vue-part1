@@ -30,7 +30,7 @@ app.use("/", routes);
 app.use(errorHandler);
 
 // 서버 실행
-const PORT = 5000;
+const PORT = process.env.NODE_PORT || 5001;
 app.listen(PORT, () => {
   console.log(`${PORT}번으로 접속하였습니다.`.bgBlack.white);
   // 데이터베이스 실행
