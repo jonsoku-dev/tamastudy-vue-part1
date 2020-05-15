@@ -18,6 +18,6 @@
     "validator": "^13.0.0"
   },
   "scripts": {
-    "dev": "nodemon ./index.js"
+    "dev": "cd src && nodemon ./index.js"
   }
 }
