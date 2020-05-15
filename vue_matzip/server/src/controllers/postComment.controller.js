@@ -1,5 +1,5 @@
-const PostComment = require('../models/postComment.model');
-const asyncHandler = require('../middlewares/asyncHandler.middleware');
+const PostComment = require("../models/postComment.model");
+const asyncHandler = require("../utils/asyncHandler");
 
 exports.createPostComment = asyncHandler(async (req, res, next) => {
   const currentUserId = req.user._id;
@@ -19,9 +19,9 @@ exports.getPostComments = asyncHandler(async (req, res, next) => {
 
   const comments = await PostComment.find({ post: currentPostId })
     .populate({
-      path: 'user',
-      model: 'User',
-      select: 'email',
+      path: "user",
+      model: "User",
+      select: "email",
     })
     .sort({ _id: -1 });
 
@@ -35,16 +35,16 @@ exports.removePostComment = asyncHandler(async (req, res, next) => {
   const comment = await PostComment.findById({ _id: currentPostCommentId });
 
   if (!comment) {
-    throw new Error('코멘트가 존재하지 않습니다. ');
+    throw new Error("코멘트가 존재하지 않습니다. ");
   }
 
   if (comment.user.toString() !== currentUserId.toString()) {
-    throw new Error('권한이 없습니다. ');
+    throw new Error("권한이 없습니다. ");
   }
 
   await comment.remove();
 
-  res.status(201).json({ msg: '댓글이 삭제되었습니다. ', ...comment._doc });
+  res.status(201).json({ msg: "댓글이 삭제되었습니다. ", ...comment._doc });
 });
 
 exports.updatePostComment = asyncHandler(async (req, res, next) => {
@@ -54,17 +54,17 @@ exports.updatePostComment = asyncHandler(async (req, res, next) => {
   let comment = await PostComment.findById({ _id: currentPostCommentId });
 
   if (!comment) {
-    throw new Error('코멘트가 존재하지 않습니다. ');
+    throw new Error("코멘트가 존재하지 않습니다. ");
   }
 
   if (comment.user.toString() !== currentUserId.toString()) {
-    throw new Error('권한이 없습니다. ');
+    throw new Error("권한이 없습니다. ");
   }
 
   comment = await PostComment.findByIdAndUpdate(
     { _id: currentPostCommentId },
     { ...req.body },
-    { new: true, runValidators: false },
+    { new: true, runValidators: false }
   );
 
   res.status(201).json(comment);
