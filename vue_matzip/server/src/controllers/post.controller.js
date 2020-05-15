@@ -1,3 +1,6 @@
+const sharp = require("sharp");
+const fs = require("fs");
+const path = require("path");
 const Post = require("../models/post.model");
 const asyncHandler = require("../utils/asyncHandler");
 
@@ -52,12 +55,36 @@ exports.getPost = asyncHandler(async (req, res, next) => {
 exports.createPost = asyncHandler(async (req, res, next) => {
   const title = req.body.title;
   const description = req.body.description;
-  const imgUrl = req.body.imgUrl ? req.body.imgUrl : "no-image.jpg";
+
+  req.files.map(async (file) => {
+    const { filename: image } = file;
+    try {
+      await sharp(file.path)
+        .resize(500)
+        .jpeg({ quality: 90 })
+        .toFile(
+          path.join(
+            __dirname,
+            "..",
+            "..",
+            "public",
+            "images",
+            "post",
+            `resized-${image}`
+          )
+        );
+      fs.unlinkSync(file.path);
+    } catch (error) {
+      console.log("RESIZING ERROR : ", error);
+    }
+  });
+
+  const images = req.files.map((file) => `resized-${file.filename}`);
 
   const newPost = await Post.create({
-    title: title,
-    description: description,
-    imgUrl: imgUrl,
+    title,
+    description,
+    images,
     user: req.user._id,
   });
 
