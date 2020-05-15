@@ -19,12 +19,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.auth {
-  &__wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-}
 </style>
