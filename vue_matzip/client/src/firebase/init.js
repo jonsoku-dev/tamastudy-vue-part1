@@ -2,20 +2,6 @@ import firebase from "firebase";
 import "firebase/firestore";
 import "firebase/auth";
 
-console.log(process.env.VUE_APP_FIREBASE_apiKey);
-
-// Initialize Firebase
-// const config = {
-//   apiKey: "AIzaSyAo6ldITRFMe4nuslHMBcWmbCUwcEYrXfk",
-//   authDomain: "vue-matzip.firebaseapp.com",
-//   databaseURL: "https://vue-matzip.firebaseio.com",
-//   projectId: "vue-matzip",
-//   storageBucket: "vue-matzip.appspot.com",
-//   messagingSenderId: "45712301989",
-//   appId: "1:45712301989:web:5207c10fd0a9969bcc124c",
-//   measurementId: "G-RYRE7B52XR",
-// };
-
 // Initialize Firebase
 const config = {
   apiKey: process.env.VUE_APP_apiKey || "",
