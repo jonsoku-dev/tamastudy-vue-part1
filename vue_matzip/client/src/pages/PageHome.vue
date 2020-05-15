@@ -13,13 +13,31 @@
       <router-link :to="{ name: 'mock-post' }" tag="h4">
         <a>MOCK UP PAGE (Post Detail)</a>
       </router-link>
+
+      <router-link :to="{ name: 'page-firebase-get-posts' }" tag="h4">
+        <a>get all post with firebase</a>
+      </router-link>
+
+      <router-link :to="{ name: 'page-firebase-create-post' }" tag="h4">
+        <a>create post with firebase</a>
+      </router-link>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "PageHome",
+  computed: {
+    ...mapGetters("fpost", ["posts"]),
+  },
+  methods: {
+    ...mapActions("fpost", ["getPosts"]),
+  },
+  created() {
+    this.getPosts();
+  },
 };
 </script>
 

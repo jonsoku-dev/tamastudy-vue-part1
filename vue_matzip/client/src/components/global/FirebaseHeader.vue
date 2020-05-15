@@ -2,22 +2,20 @@
   <header class="header">
     <div class="header__wrapper container">
       <router-link :to="{ name: 'page-home' }" tag="div">
-        <span class="header__logo">Node</span>
+        <span class="header__logo">FireBase</span>
       </router-link>
       <ul class="header__list" v-if="!isLoggedIn">
-        <router-link class="header__item" :to="{ name: 'page-login' }" tag="li">
+        <router-link class="header__item" :to="{ name: 'page-fb-login' }" tag="li">
           <a class="header__link">login</a>
         </router-link>
-        <router-link class="header__item" :to="{ name: 'page-register' }" tag="li">
+        <router-link class="header__item" :to="{ name: 'page-fb-register' }" tag="li">
           <a class="header__link">register</a>
         </router-link>
       </ul>
       <ul class="header__list" v-else>
         <li class="header__item">
-          <img class="header__user header__user--avatar" :src="getUser && getUser.avatar" alt />
-          <span
-            class="header__user header__user--username"
-          >{{ getUser && getUser.username }} 님 환영합니다.</span>
+          <img class="header__user header__user--avatar" src alt />
+          <span class="header__user header__user--username">{{ user && user.email }} 님 환영합니다.</span>
         </li>
         <router-link class="header__item" :to="{ name: 'page-posts' }" tag="li">
           <a class="header__link">post</a>
@@ -36,12 +34,12 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 export default {
-  name: "Header",
+  name: "FirebaseHeader",
   computed: {
-    ...mapGetters(["isLoggedIn", "getUser"]),
+    ...mapGetters('auth', ["isLoggedIn", "user"])
   },
   methods: {
-    ...mapActions(["logout"]),
+    ...mapActions('auth', ["logout"]),
   },
 };
 </script>
