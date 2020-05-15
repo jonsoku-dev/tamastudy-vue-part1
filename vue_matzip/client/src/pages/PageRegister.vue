@@ -9,6 +9,7 @@
 
 <script>
 import RegisterForm from "../components/auth/RegisterForm";
+
 export default {
   name: "PageRegister",
   components: {

@@ -4,6 +4,11 @@ import NProgress from "nprogress";
 import PageHome from "./pages/PageHome";
 import PageLogin from "./pages/PageLogin";
 import PageRegister from "./pages/PageRegister";
+import PageFirebaseLogin from "./pages/PageFirebaseLogin";
+import PageFirebaseRegister from "./pages/PageFirebaseRegister";
+import PageFirebaseGetPosts from "./pages/PageFirebaseGetPosts";
+import PageFirebaseCreatePost from "./pages/PageFirebaseCreatePost";
+import PageFirebaseGetPost from "./pages/PageFirebaseGetPost";
 import PageDashboard from "./pages/PageDashboard";
 import PageAllPosts from "./pages/PageAllPosts";
 import PagePost from "./pages/PagePost";
@@ -36,6 +41,22 @@ const router = new Router({
       path: "/register",
       name: "page-register",
       component: PageRegister,
+      meta: {
+        guest: true,
+      },
+    },
+    {
+      path: "/fb-login",
+      name: "page-fb-login",
+      component: PageFirebaseLogin,
+      meta: {
+        guest: true,
+      },
+    },
+    {
+      path: "/fb-register",
+      name: "page-fb-register",
+      component: PageFirebaseRegister,
       meta: {
         guest: true,
       },
@@ -83,6 +104,21 @@ const router = new Router({
             }
           });
       },
+    },
+    {
+      path: "/fb-post",
+      name: "page-firebase-get-posts",
+      component: PageFirebaseGetPosts,
+    },
+    {
+      path: "/fb-post/:post_slug",
+      name: "page-firebase-get-post",
+      component: PageFirebaseGetPost,
+    },
+    {
+      path: "/fb-post/create",
+      name: "page-firebase-create-post",
+      component: PageFirebaseCreatePost,
     },
     {
       path: "/mock-posts",
