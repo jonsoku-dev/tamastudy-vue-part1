@@ -1,6 +1,6 @@
 import slugify from "slugify";
 import db, { firebaseAuth } from "../../firebase/init";
-import * as types from "./types";
+import * as types from "../modules/types";
 import router from "../../router";
 
 const initialState = {

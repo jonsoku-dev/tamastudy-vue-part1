@@ -1,7 +1,6 @@
 <template>
   <div>
     <Header />
-    <firebase-header />
     <transition name="slide-fade" mode="out-in">
       <router-view />
     </transition>
@@ -11,13 +10,11 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import Header from "./components/global/Header";
-import FirebaseHeader from './components/global/FirebaseHeader';
 
 export default {
   name: "App",
   components: {
     Header,
-    FirebaseHeader
   },
   methods: {
     ...mapActions(["getMe"]),
