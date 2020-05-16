@@ -1,6 +1,7 @@
+import * as admin from "firebase-admin";
 import { firebaseAuth } from "../../firebase/init";
 import router from "../../router";
-import * as types from "./types";
+import * as types from "../modules/types";
 
 const initialState = {
   registerLoading: false,
@@ -27,9 +28,10 @@ const mutations = {
   [types.REGISTER_PENDING](state) {
     state.registerLoading = true;
   },
-  [types.REGISTER_SUCCESS](state, user) {
+  [types.REGISTER_SUCCESS](state, payload) {
     state.registerLoading = false;
-    state.user = user;
+    state.user = payload.user;
+    window.sessionStorage.setItem("fb-token", payload.token);
   },
   [types.REGISTER_ERROR](state, error) {
     state.registerLoading = false;
@@ -38,9 +40,10 @@ const mutations = {
   [types.LOG_IN_PENDING](state) {
     state.loginLoading = true;
   },
-  [types.LOG_IN_SUCCESS](state, user) {
+  [types.LOG_IN_SUCCESS](state, payload) {
     state.loginLoading = false;
-    state.user = user;
+    state.user = payload.user;
+    window.sessionStorage.setItem("fb-token", payload.token);
   },
   [types.LOG_IN_ERROR](state, error) {
     state.loginLoading = false;
@@ -71,10 +74,15 @@ const mutations = {
 };
 
 const actions = {
-  getCurrentUser: async ({ commit }) => {
-    const user = await firebaseAuth.currentUser;
-    console.log(user);
-    commit(types.GET_CURRENT_USER_PENDING, user);
+  getCurrentUser: async ({ commit }, token) => {
+    commit(types.GET_CURRENT_USER_PENDING);
+    try {
+      const user = await admin.auth().verifyIdToken(token);
+      console.log(user);
+      commit(types.GET_CURRENT_USER_SUCCESS, user);
+    } catch (error) {
+      commit(types.GET_CURRENT_USER_ERROR, error.message);
+    }
   },
   register: async ({ commit }, registerFormData) => {
     commit(types.REGISTER_PENDING);
@@ -84,7 +92,8 @@ const actions = {
         registerFormData.password
       );
       const user = await firebaseAuth.currentUser;
-      commit(types.REGISTER_SUCCESS, user);
+      const token = await user.getIdToken();
+      commit(types.REGISTER_SUCCESS, { user, token });
       router.push({ name: "page-home" });
     } catch (error) {
       commit(types.REGISTER_ERROR, error.message);
@@ -98,7 +107,8 @@ const actions = {
         loginFormData.password
       );
       const user = await firebaseAuth.currentUser;
-      commit(types.LOG_IN_SUCCESS, user);
+      const token = await user.getIdToken();
+      commit(types.LOG_IN_SUCCESS, { user, token });
       router.push({ name: "page-home" });
     } catch (error) {
       commit(types.LOG_IN_ERROR, error.message);
