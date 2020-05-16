@@ -40,6 +40,9 @@
   },
   "dependencies": {
     "crypto-random-string": "^3.2.0",
-    "dayjs": "^1.8.25"
+    "dayjs": "^1.8.25",
+    "dns": "^0.2.2",
+    "firebase-admin": "^8.12.1",
+    "http2": "^3.3.7"
   }
 }
