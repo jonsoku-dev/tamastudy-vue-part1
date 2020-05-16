@@ -17,7 +17,7 @@
           <router-link :to="{ name: 'register' }">REIGSTER</router-link>
         </li>
         <li class="header__item header__item--user" v-if="isLoggedIn">
-          <span>Hi, {{ userName }}</span>
+          <span>Hi, {{ userName }} </span>
         </li>
         <li class="header__item header__item--logout" v-if="isLoggedIn">
           <a href="#" @click.prevent="logout">LOGOUT</a>
