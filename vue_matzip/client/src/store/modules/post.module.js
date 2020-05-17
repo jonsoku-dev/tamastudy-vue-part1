@@ -8,10 +8,11 @@ export default {
   state: {
     posts: [],
     pageInfo: null,
-    post: null,
+    post: {},
   },
   getters: {
     posts: (state) => state.posts,
+    post: (state) => state.post,
     pageInfo: (state) => state.pageInfo,
   },
   mutations: {

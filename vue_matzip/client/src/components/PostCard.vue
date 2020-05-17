@@ -2,10 +2,7 @@
   <article class="posts__wrapper">
     <div class="posts__header pd16">
       <div class="posts__avatar">
-        <img
-          src="https://stickershop.line-scdn.net/stickershop/v1/product/16687/LINEStorePC/main.png;compress=true"
-          alt="avatar"
-        />
+        <img :src="post.user.avatar" alt="avatar" />
       </div>
       <div class="posts__info">
         <p class="posts__author">{{ post.user.username }}</p>
@@ -19,7 +16,11 @@
     </div>
     <div class="posts__thumbnail">
       <img
-        src="https://ww.namu.la/s/d4c53737b61fec8cf0fa02206d85a5022fc5465593f2e0190648f7c5911acd836a5f7a1db0f19f0136ec1c178d782465a9455b31d178b79df5133fc6b493a41f2f0f4e4cc95b12b0f84732987c391c4d81b2f734052651f5506e5d91a15ad62f"
+        :src="
+          post.images.length > 0
+            ? post.images[0]
+            : 'https://recipe1.ezmember.co.kr/cache/recipe/2016/07/02/40c4f639ca973d9acccecdf7cbe0cbc41.jpg'
+        "
         alt="food"
       />
     </div>
@@ -242,6 +243,8 @@ export default {
     }
   }
   &__etc {
+    display: flex;
+    align-items: center;
     i {
       margin-right: 4px;
       width: 20px !important;
