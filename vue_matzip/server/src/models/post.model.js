@@ -7,7 +7,13 @@ const postSchema = new Schema(
     title: {
       type: String,
       required: [true, "타이틀을 입력해주세요. "],
-      max: [20, "20자 이내로 입력해주세요. "],
+      max: [15, "15자 이내로 입력해주세요. "],
+      trim: true,
+    },
+    subTitle: {
+      type: String,
+      required: [true, "서브 타이틀을 입력해주세요. "],
+      max: [15, "15자 이내로 입력해주세요. "],
       trim: true,
     },
     description: {
@@ -36,6 +42,7 @@ const postSchema = new Schema(
     location: {
       address: {
         type: String,
+        required: [true, "위치를 입력해주세요. "],
       },
       lng: {
         type: Number,
@@ -49,13 +56,15 @@ const postSchema = new Schema(
       min: 0,
       max: 5,
     },
-    averageLunchCost: {
+    averageLunchPrice: {
       type: Number,
       max: 9999999,
+      required: [true, "점심시간 평균가격을 입력해주세요. "],
     },
-    averageDinnerConst: {
+    averageDinnerPrice: {
       type: Number,
       max: 9999999,
+      required: [true, "저녁시간 평균가격을 입력해주세요. "],
     },
     user: {
       type: mongoose.Types.ObjectId,

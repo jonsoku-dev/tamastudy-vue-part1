@@ -53,11 +53,9 @@ exports.getPost = asyncHandler(async (req, res, next) => {
 });
 
 exports.createPost = asyncHandler(async (req, res, next) => {
-  const title = req.body.title;
-  const description = req.body.description;
   let images = [];
 
-  if (req.files.length !== 0) {
+  if (req.files && req.files.length !== 0) {
     console.log("이미지 리사이징 중 ...");
     req.files.map(async (file) => {
       const { filename: image } = file;
@@ -85,8 +83,7 @@ exports.createPost = asyncHandler(async (req, res, next) => {
   }
 
   const newPost = await Post.create({
-    title,
-    description,
+    ...req.body,
     images,
     user: req.user._id,
   });
