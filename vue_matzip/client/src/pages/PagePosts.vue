@@ -1,16 +1,30 @@
 <template>
   <div>
     <h2>PagePosts</h2>
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur assumenda
-    vero voluptatem sapiente dolorem velit similique repudiandae, labore alias?
-    Quibusdam vel necessitatibus alias minus incidunt consequatur nulla? Rerum,
-    voluptatem reprehenderit.
+    <section>
+      <post-card v-for="post in posts" :key="post.id" :post="post" />
+    </section>
   </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
+import PostCard from "@/components/PostCard.vue";
+
 export default {
   name: "PagePosts",
+  components: {
+    PostCard,
+  },
+  computed: {
+    ...mapGetters("postState", ["posts", "pageInfo"]),
+  },
+  methods: {
+    ...mapActions("postState", ["fetchPosts"]),
+  },
+  created() {
+    this.fetchPosts();
+  },
 };
 </script>
 

@@ -1,11 +1,12 @@
 import Nprogress from "nprogress";
 import API from "@/utils/API";
+import dn from "@/utils/dn";
+import router from "@/router";
 
 export default {
   namespaced: true,
   state: {
     user: null,
-    error: null,
   },
   getters: {
     isLoggedIn: (state) => !!state.user,
@@ -22,13 +23,9 @@ export default {
     AUTH_LOGIN: (state, token) => {
       window.sessionStorage.setItem("token", token);
     },
-    AUTH_ERROR: (state, error) => {
-      state.error = error;
-    },
     AUTH_CLEAR: (state) => {
       window.sessionStorage.removeItem("token");
       state.user = null;
-      state.error = null;
     },
   },
   actions: {
@@ -43,13 +40,14 @@ export default {
         const res = await API.get("/user/me", config);
         const user = res.data;
         commit("AUTH_LOAD_USER", user);
+        dn(dispatch, "success", "유저정보를 로드했습니다. ");
         Nprogress.done();
       } catch (error) {
         if (error.response.status === 401) {
-          console.log("loadUser error");
+          dn(dispatch, "error", "토큰을 확인해주세요. ");
           dispatch("logout");
         } else {
-          commit("AUTH_ERROR", error.response.data);
+          dn(dispatch, "error", error.response.data.err);
           Nprogress.done();
         }
       }
@@ -61,9 +59,10 @@ export default {
         const token = res.data;
         commit("AUTH_REGISTER", token);
         dispatch("loadUser", token);
+        dn(dispatch, "success", "회원가입 되었습니다.");
+        router.push({ name: "home" });
       } catch (error) {
-        console.log(error.response.data.err);
-        commit("AUTH_ERROR", error.response.data);
+        dn(dispatch, "error", error.response.data.err);
         Nprogress.done();
       }
     },
@@ -74,16 +73,19 @@ export default {
         const token = res.data;
         commit("AUTH_LOGIN", token);
         dispatch("loadUser", token);
+        dn(dispatch, "success", "로그인 되었습니다.");
+        router.push({ name: "home" });
       } catch (error) {
-        console.log(error.response.data.err);
-        commit("AUTH_ERROR", error.response.data);
+        dn(dispatch, "error", error.response.data.err);
         Nprogress.done();
       }
     },
-    logout: ({ commit }) => {
+    logout: ({ commit, dispatch }) => {
       Nprogress.start();
       commit("AUTH_CLEAR");
       Nprogress.done();
+      dn(dispatch, "success", "로그아웃 되었습니다.");
+      router.push({ name: "home" });
     },
   },
 };

@@ -1,10 +1,11 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-import PageHome from "./pages/PageHome";
-import PagePosts from "./pages/PagePosts";
-import PageLogin from "./pages/PageLogin";
-import PageRegister from "./pages/PageRegister";
+import PageHome from "@/pages/PageHome";
+import PagePosts from "@/pages/PagePosts";
+import PagePost from "@/pages/PagePost";
+import PageLogin from "@/pages/PageLogin";
+import PageRegister from "@/pages/PageRegister";
 
 Vue.use(VueRouter);
 
@@ -20,6 +21,11 @@ const router = new VueRouter({
       path: "/posts",
       name: "posts",
       component: PagePosts,
+    },
+    {
+      path: "/post/:postId",
+      name: "post",
+      component: PagePost,
     },
     {
       path: "/login",

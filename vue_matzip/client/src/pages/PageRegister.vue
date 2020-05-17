@@ -59,9 +59,7 @@ export default {
       this.formData[event.target.name] = event.target.value;
     },
     onSubmit: function () {
-      this.register(this.formData).then(() =>
-        this.$router.push({ name: "home" })
-      );
+      this.register(this.formData);
     },
   },
 };
