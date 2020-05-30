@@ -1,6 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
+import store from "@/store";
+
 // @ main page
 import PageHome from "@/pages/PageHome";
 import PageAbout from "@/pages/PageAbout";
@@ -34,17 +36,22 @@ const routes = [
     path: "/auth",
     name: "page-auth",
     component: PageAuth,
-    redirect: { name: "page-login" },
     children: [
       {
         path: "register",
         name: "page-register",
         component: PageRegister,
+        meta: {
+          guestPage: true,
+        },
       },
       {
         path: "login",
         name: "page-login",
         component: PageLogin,
+        meta: {
+          guestPage: true,
+        },
       },
     ],
   },
@@ -82,6 +89,17 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  store.dispatch("authModule/loadUser").then((res) => {
+    if (!!res && to.matched.some((record) => record.meta.guestPage)) {
+      next({ name: "page-home" });
+    } else {
+      next();
+    }
+  });
+  next();
 });
 
 export default router;
