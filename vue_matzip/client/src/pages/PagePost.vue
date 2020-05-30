@@ -1,6 +1,8 @@
 <template>
   <div>
-    PagePost
+    <router-link :to="{ name: 'page-all-posts' }">All</router-link> |
+    <router-link :to="{ name: 'page-create-post' }">Create</router-link>
+    <router-view />
   </div>
 </template>
 

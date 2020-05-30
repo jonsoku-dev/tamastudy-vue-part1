@@ -34,14 +34,15 @@ const routes = [
     path: "/auth",
     name: "page-auth",
     component: PageAuth,
+    redirect: { name: "page-login" },
     children: [
       {
-        path: "/register",
+        path: "register",
         name: "page-register",
         component: PageRegister,
       },
       {
-        path: "/login",
+        path: "login",
         name: "page-login",
         component: PageLogin,
       },
@@ -51,24 +52,25 @@ const routes = [
     path: "/post",
     name: "page-post",
     component: PagePost,
+    redirect: { name: "page-all-posts" },
     children: [
       {
-        path: "/all",
+        path: "all",
         name: "page-all-posts",
         component: PageAllPosts,
       },
       {
-        path: "/:postId",
-        name: "page-one-post",
-        component: PageOnePost,
-      },
-      {
-        path: "/create",
+        path: "create",
         name: "page-create-post",
         component: PageCreatePost,
       },
       {
-        path: "/:postId/update",
+        path: ":postId",
+        name: "page-one-post",
+        component: PageOnePost,
+      },
+      {
+        path: ":postId/update",
         name: "page-update-post",
         component: PageUpdatePost,
       },
