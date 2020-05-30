@@ -14,10 +14,7 @@ exports.registerHandler = asyncHandler(async (req, res, next) => {
 
   const token = newUser.createJwt();
 
-  res.status(201).json({
-    token,
-    user: newUser,
-  });
+  res.status(201).json(token);
 });
 
 exports.loginHandler = asyncHandler(async (req, res, next) => {
@@ -38,10 +35,7 @@ exports.loginHandler = asyncHandler(async (req, res, next) => {
 
   const token = user.createJwt();
 
-  res.status(201).json({
-    token,
-    user,
-  });
+  res.status(201).json(token);
 });
 
 exports.getMeHandler = asyncHandler(async (req, res, next) => {
