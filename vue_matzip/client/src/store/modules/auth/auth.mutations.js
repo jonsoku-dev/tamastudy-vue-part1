@@ -4,10 +4,8 @@ export default {
   [types.REGISTER_PENDING]: (state) => {
     state.registerLoading = true;
   },
-  [types.REGISTER_SUCCESS]: (state, token) => {
+  [types.REGISTER_SUCCESS]: (state) => {
     state.registerLoading = false;
-    state.token = token;
-    window.sessionStorage.setItem("token", token);
   },
   [types.REGISTER_FAIL]: (state) => {
     state.registerLoading = false;
@@ -15,10 +13,8 @@ export default {
   [types.LOGIN_PENDING]: (state) => {
     state.loginLoading = true;
   },
-  [types.LOGIN_SUCCESS]: (state, token) => {
+  [types.LOGIN_SUCCESS]: (state) => {
     state.loginLoading = false;
-    state.token = token;
-    window.sessionStorage.setItem("token", token);
   },
   [types.LOGIN_FAIL]: (state) => {
     state.loginLoading = false;
@@ -34,8 +30,6 @@ export default {
     state.loadUserLoading = false;
   },
   [types.CLEAR_AUTH]: (state) => {
-    state.token = null;
     state.userData = null;
-    window.sessionStorage.removeItem("token");
   },
 };

@@ -4,7 +4,6 @@ import actions from "@/store/modules/auth/auth.actions";
 
 const state = () => {
   return {
-    token: null,
     userData: null,
     registerLoading: false,
     loginLoading: false,

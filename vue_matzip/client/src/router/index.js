@@ -70,6 +70,9 @@ const routes = [
         path: "create",
         name: "page-create-post",
         component: PageCreatePost,
+        meta: {
+          requireAuthPage: true,
+        },
       },
       {
         path: ":postId",
@@ -80,6 +83,9 @@ const routes = [
         path: ":postId/update",
         name: "page-update-post",
         component: PageUpdatePost,
+        meta: {
+          requireAuthPage: true,
+        },
       },
     ],
   },
@@ -92,14 +98,23 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  store.dispatch("authModule/loadUser").then((res) => {
-    if (!!res && to.matched.some((record) => record.meta.guestPage)) {
+  const isLoggedIn = store.getters["authModule/isAuthenticated"];
+  if (to.matched.some((record) => record.meta.guestPage)) {
+    if (isLoggedIn) {
       next({ name: "page-home" });
     } else {
       next();
     }
-  });
-  next();
+  } else if (to.matched.some((record) => record.meta.requireAuthPage)) {
+    if (isLoggedIn) {
+      next();
+    } else {
+      alert("로그인 페이지로 이동합니다. ");
+      next({ name: "page-login" });
+    }
+  } else {
+    next();
+  }
 });
 
 export default router;

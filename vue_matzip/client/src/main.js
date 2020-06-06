@@ -4,10 +4,15 @@ import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
 
+// subscribers
+import "@/store/modules/auth/auth.subscriber";
+
 Vue.config.productionTip = false;
 
-new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount("#app");
+store.dispatch("authModule/loadUser").then(() => {
+  new Vue({
+    router,
+    store,
+    render: (h) => h(App),
+  }).$mount("#app");
+});

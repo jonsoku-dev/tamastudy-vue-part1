@@ -10,7 +10,8 @@ export default {
       const res = await API.post("user/register", formData);
       const token = res.data;
       commit(types.REGISTER_SUCCESS, token);
-      router.push({ name: "page-home" });
+      dispatch("loadUser");
+      await router.push({ name: "page-home" });
     } catch (error) {
       commit(types.REGISTER_FAIL);
       dispatch("clearAuth");
@@ -22,7 +23,8 @@ export default {
       const res = await API.post("user/login", formData);
       const token = res.data;
       commit(types.LOGIN_SUCCESS, token);
-      router.push({ name: "page-home" });
+      dispatch("loadUser");
+      await router.push({ name: "page-home" });
     } catch (error) {
       commit(types.LOGIN_FAIL);
       dispatch("clearAuth");
@@ -31,17 +33,14 @@ export default {
   async loadUser({ commit, dispatch }) {
     commit(types.LOAD_USER_PENDING);
     const token = window.sessionStorage.getItem("token");
-    const config = {
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    };
+    if (!token) {
+      commit(types.LOAD_USER_FAIL);
+      return null;
+    }
     try {
-      const res = await API.get("user/me", config);
+      const res = await API.get("user/me");
       const userData = res.data;
       commit(types.LOAD_USER_SUCCESS, userData);
-
-      return res.data;
     } catch (error) {
       commit(types.LOAD_USER_FAIL);
       dispatch("clearAuth");
@@ -49,5 +48,6 @@ export default {
   },
   clearAuth({ commit }) {
     commit(types.CLEAR_AUTH);
+    router.push({ name: "page-login" });
   },
 };
