@@ -10,7 +10,7 @@
           />
         </router-link>
       </div>
-      <ul class="header__nav">
+      <ul class="header__nav" v-if="isAuthenticated">
         <li class="header__list">
           <router-link to="/auth" class="header__link">
             <div class="header__avatar-box">
@@ -33,9 +33,31 @@
           </router-link>
         </li>
         <li class="header__list">
-          <router-link to="/post" class="header__link">
+          <div class="header__button header__button--grey" @click="clearAuth">
+            <span>Sign Out</span>
+          </div>
+        </li>
+      </ul>
+
+      <ul class="header__nav" v-else>
+        <li class="header__list">
+          <router-link to="/post/all" class="header__link">
+            <div class="header__button header__button--blue">
+              <span>Post</span>
+            </div>
+          </router-link>
+        </li>
+        <li class="header__list">
+          <router-link to="/auth/login" class="header__link">
+            <div class="header__button header__button--green">
+              <span>LOGIN</span>
+            </div>
+          </router-link>
+        </li>
+        <li class="header__list">
+          <router-link to="/auth/register" class="header__link">
             <div class="header__button header__button--grey">
-              <span>Sign Out</span>
+              <span>REGISTER</span>
             </div>
           </router-link>
         </li>
@@ -45,14 +67,17 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "Header",
   data() {
     return {};
   },
   computed: {
-    ...mapGetters("authModule", ["userData"]),
+    ...mapGetters("authModule", ["userData", "isAuthenticated"]),
+  },
+  methods: {
+    ...mapActions("authModule", ["clearAuth"]),
   },
 };
 </script>
@@ -119,6 +144,7 @@ export default {
     }
     &--grey {
       background-color: #8c8c8c;
+      cursor: pointer;
     }
   }
 }
