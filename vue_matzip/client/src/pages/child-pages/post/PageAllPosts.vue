@@ -12,9 +12,7 @@
           </div>
           <div class="posts__info">
             <p class="posts__author">{{ post.user && post.user.username }}</p>
-            <p class="posts__location">
-              {{ post.location && post.location.address }}
-            </p>
+            <p class="posts__location">{{ post.location && post.location.address }}</p>
           </div>
           <button class="posts__func">
             <md-button class="md-icon-button">
@@ -23,19 +21,20 @@
           </button>
         </div>
         <div class="posts__thumbnail">
-          <img
-            :src="'http://localhost:5001/images/post/' + post.images[0]"
-            alt="food"
-          />
+          <img :src="'http://localhost:5001/images/post/' + post.images[0]" alt="food" />
         </div>
         <div class="posts__content pd16">
           <div class="posts__content1">
-            <strong class="posts__title posts__title--main">{{
+            <strong class="posts__title posts__title--main">
+              {{
               post.title
-            }}</strong>
-            <span class="posts__title posts__title--sub">{{
+              }}
+            </strong>
+            <span class="posts__title posts__title--sub">
+              {{
               post.subTitle
-            }}</span>
+              }}
+            </span>
           </div>
           <div class="posts__content2">
             <div class="posts__price posts__price--dinner">
@@ -52,10 +51,7 @@
             </div>
           </div>
           <div class="posts__content3">
-            <p
-              v-html="post.description"
-              class="posts__desc posts__desc--text"
-            ></p>
+            <p v-html="post.description" class="posts__desc posts__desc--text"></p>
             <button class="posts__desc posts__desc--btn">더보기</button>
           </div>
         </div>
@@ -86,13 +82,13 @@ export default {
     this.getAllPostsAction();
   },
   computed: {
-    ...mapState("postModule", ["posts"]),
+    ...mapState("postModule", ["posts"])
   },
   methods: {
     ...mapActions("postModule", {
-      getAllPostsAction: "getAllPosts",
-    }),
-  },
+      getAllPostsAction: "getAllPosts"
+    })
+  }
 };
 </script>
 

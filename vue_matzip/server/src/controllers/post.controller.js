@@ -20,7 +20,7 @@ exports.getPosts = asyncHandler(async (req, res, next) => {
     .populate({
       path: "user",
       model: "User",
-      select: "username",
+      select: "username avatar",
     })
     .limit(limit + 1)
     .sort({ _id: -1 });
@@ -46,7 +46,7 @@ exports.getPost = asyncHandler(async (req, res, next) => {
   ).populate({
     path: "user",
     model: "User",
-    select: "username",
+    select: "username avatar",
   });
   if (!post) return next(`${postId}에 대한 포스트가 존재하지 않습니다. `);
   res.status(200).json(post);
